@@ -1,5 +1,5 @@
 import styles from "./Gameboard.module.scss";
-import { CellKind } from "../../global-types/celltype";
+import { CellKind } from "../../types/cellKind";
 import GameboardItem from "./GameboardItem/GameboardItem";
 
 type GameboardProps = {

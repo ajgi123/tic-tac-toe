@@ -1,4 +1,4 @@
-import { CellKind } from "../global-types/celltype";
+import { CellKind } from "../types/cellKind";
 
 export const generateEmptyGameState = (size: number) => {
   const length = size * size;

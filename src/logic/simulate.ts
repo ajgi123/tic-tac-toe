@@ -1,6 +1,6 @@
 import { checkForWinner } from "./checkForWinner";
 import { generateEmptyGameState } from "../helpers/generateEmptyGameState";
-import { CellKind } from "../global-types/celltype";
+import { CellKind } from "../types/cellKind";
 import { miniMaxScope, randomAi } from "./AI";
 
 export const simulate = (

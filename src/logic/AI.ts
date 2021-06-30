@@ -1,4 +1,4 @@
-import { CellKind } from "../global-types/celltype";
+import { CellKind } from "../types/cellKind";
 import { checkForWinner } from "./checkForWinner";
 
 const getRandomIntInclusive = (min: number, max: number) => {

@@ -1,5 +1,6 @@
+
 import styles from "./GameboardItem.module.scss";
-import { CellKind } from "../../../global-types/celltype";
+import { CellKind } from "../../../types/cellKind";
 
 type GameboardItemProps = {
   cellFill: CellKind;

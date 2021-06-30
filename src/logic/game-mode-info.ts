@@ -1,4 +1,4 @@
-import { GameModesType } from "../global-types/game-mode-type";
+import { GameModesType } from "../types/game-mode-type";
 
 export type GameModeInfoType = {
   [Mode in GameModesType]: string;

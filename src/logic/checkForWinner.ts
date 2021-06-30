@@ -1,7 +1,7 @@
-import { GameState } from "../global-types/game-state-type";
-import { CellKind } from "../global-types/celltype";
+import { CellKind } from "../types/cellKind";
 
-export const checkForWinner = (gameState: GameState) => {
+
+export const checkForWinner = (gameState: CellKind[]) => {
   const lengthSqrt = Math.sqrt(gameState.length);
 
   const rowSet = new Set<CellKind>();
