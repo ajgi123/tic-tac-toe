@@ -1,0 +1,32 @@
+@import "../../../variables.scss";
+
+.input_label {
+  display: flex;
+  flex-direction: column;
+  margin: $margin;
+  font-size: 1rem;
+}
+
+.input {
+  position: relative;
+  padding: $input-padding;
+  font-size: $input-font-size;
+  font-family: inherit;
+  border: $border;
+  border-radius: $radius;
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    opacity: 1;
+  }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: inner-spin-button !important;
+    width: 25px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+  }
+}
