@@ -1,0 +1,16 @@
+.homepage {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    font-size: 2rem;
+  }
+}
+
+.homepage_div_gameboard {
+  height: 25rem;
+  width: 25rem;
+}
