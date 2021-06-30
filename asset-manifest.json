@@ -1,23 +1,22 @@
 {
   "files": {
-    "main.css": "/tic-tac-toe/static/css/main.9d5b29c0.chunk.css",
-    "main.js": "/tic-tac-toe/static/js/main.320c801f.chunk.js",
-    "main.js.map": "/tic-tac-toe/static/js/main.320c801f.chunk.js.map",
-    "runtime-main.js": "/tic-tac-toe/static/js/runtime-main.d15972a0.js",
-    "runtime-main.js.map": "/tic-tac-toe/static/js/runtime-main.d15972a0.js.map",
-    "static/js/2.9ae5340d.chunk.js": "/tic-tac-toe/static/js/2.9ae5340d.chunk.js",
-    "static/js/2.9ae5340d.chunk.js.map": "/tic-tac-toe/static/js/2.9ae5340d.chunk.js.map",
-    "static/js/3.28c41cfb.chunk.js": "/tic-tac-toe/static/js/3.28c41cfb.chunk.js",
-    "static/js/3.28c41cfb.chunk.js.map": "/tic-tac-toe/static/js/3.28c41cfb.chunk.js.map",
+    "main.css": "/tic-tac-toe/static/css/main.206fa03c.chunk.css",
+    "main.js": "/tic-tac-toe/static/js/main.00f97fdc.chunk.js",
+    "main.js.map": "/tic-tac-toe/static/js/main.00f97fdc.chunk.js.map",
+    "runtime-main.js": "/tic-tac-toe/static/js/runtime-main.d89b838a.js",
+    "runtime-main.js.map": "/tic-tac-toe/static/js/runtime-main.d89b838a.js.map",
+    "static/js/2.d9d56dcd.chunk.js": "/tic-tac-toe/static/js/2.d9d56dcd.chunk.js",
+    "static/js/2.d9d56dcd.chunk.js.map": "/tic-tac-toe/static/js/2.d9d56dcd.chunk.js.map",
     "index.html": "/tic-tac-toe/index.html",
-    "static/css/main.9d5b29c0.chunk.css.map": "/tic-tac-toe/static/css/main.9d5b29c0.chunk.css.map",
-    "static/js/2.9ae5340d.chunk.js.LICENSE.txt": "/tic-tac-toe/static/js/2.9ae5340d.chunk.js.LICENSE.txt",
-    "static/media/logo.6ce24c58.svg": "/tic-tac-toe/static/media/logo.6ce24c58.svg"
+    "static/css/main.206fa03c.chunk.css.map": "/tic-tac-toe/static/css/main.206fa03c.chunk.css.map",
+    "static/js/2.d9d56dcd.chunk.js.LICENSE.txt": "/tic-tac-toe/static/js/2.d9d56dcd.chunk.js.LICENSE.txt",
+    "static/js/simulateWorker.e09140a6.chunk.worker.js": "/tic-tac-toe/static/js/simulateWorker.e09140a6.chunk.worker.js",
+    "static/js/simulateWorker.e09140a6.chunk.worker.js.map": "/tic-tac-toe/static/js/simulateWorker.e09140a6.chunk.worker.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.d15972a0.js",
-    "static/js/2.9ae5340d.chunk.js",
-    "static/css/main.9d5b29c0.chunk.css",
-    "static/js/main.320c801f.chunk.js"
+    "static/js/runtime-main.d89b838a.js",
+    "static/js/2.d9d56dcd.chunk.js",
+    "static/css/main.206fa03c.chunk.css",
+    "static/js/main.00f97fdc.chunk.js"
   ]
 }
