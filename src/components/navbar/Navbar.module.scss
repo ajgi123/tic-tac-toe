@@ -1,0 +1,20 @@
+@import "../../variables.scss";
+
+.navbar {
+  position: fixed;
+  z-index: 5;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  border-bottom: $border;
+  height: $navbar-height;
+  background-color: $navbar-color;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar_ul {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch center;
+}

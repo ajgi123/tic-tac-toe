@@ -1,0 +1,24 @@
+@import "../../../variables.scss";
+
+.dropdown_menu {
+  position: absolute;
+  top: $navbar-height;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: $dropdown-color;
+  border: $border;
+  width: 18rem;
+}
+
+.dropdown_menu_ul {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown_menu_p {
+  padding: 1rem;
+  text-align: center;
+  color: $black-color;
+}

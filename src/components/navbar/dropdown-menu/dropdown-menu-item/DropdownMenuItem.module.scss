@@ -1,0 +1,16 @@
+@import "../../../../variables.scss";
+
+.item {
+  background-color: $button-color;
+  border: $border;
+  padding: $button-padding;
+  text-align: center;
+  color: $black-color;
+
+  &:hover,
+  &:active {
+    cursor: pointer;
+    background-color: $button-color-hover;
+    color: $white-color;
+  }
+}
