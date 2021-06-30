@@ -1,0 +1,29 @@
+@import "../../../../variables.scss";
+
+.simulated_game {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: $border;
+  border-radius: $radius;
+  padding: 0.5rem;
+  margin: $margin;
+  background-color: $dropdown-color;
+  h1,
+  h2 {
+    text-align: center;
+    margin-bottom: $margin;
+  }
+  h1 {
+    font-size: 1.5rem;
+  }
+  h2 {
+    font-size: 1.3rem;
+  }
+}
+
+.simulated_game_gameboard_div {
+  width: 15rem;
+  height: 15rem;
+}

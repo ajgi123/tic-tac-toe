@@ -1,0 +1,31 @@
+.simulation_page {
+  padding-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.simulation_page_grid_div {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  button {
+    grid-column: 1 / 4;
+  }
+}
+
+.select {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.simulation_pie_div {
+  height: 18rem;
+  margin: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
