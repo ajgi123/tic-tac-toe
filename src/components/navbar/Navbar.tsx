@@ -1,7 +1,7 @@
 import styles from "./Navbar.module.scss";
 import { useState, useContext } from "react";
 import { GameModeInfo } from "../../logic/game-mode-info";
-import { GameModeContext } from "../../store/gameMode-context";
+import { GameModeContext } from "../../context/gameMode-context";
 import DropdownMenuItem from "./dropdown-menu/dropdown-menu-item/DropdownMenuItem";
 import DropdownMenu from "./dropdown-menu/DropdownMenu";
 import Dropdown from "./dropdown/Dropdown";
