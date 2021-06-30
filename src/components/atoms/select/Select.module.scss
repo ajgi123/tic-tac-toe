@@ -1,0 +1,43 @@
+@import "../../../variables.scss";
+
+.select_label {
+  display: flex;
+  flex-direction: column;
+  margin: $margin;
+  font-size: 1rem;
+}
+
+.select {
+  font-size: $input-font-size;
+  font-family: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+  color: $black-color;
+  border: $border;
+  line-height: 1;
+  outline: 0;
+  padding: $input-padding;
+  border-radius: $radius;
+  background-color: $select-background-color;
+  background-image: linear-gradient($black-color, $black-color),
+    linear-gradient(-135deg, transparent 50%, $black-color 50%),
+    linear-gradient(-225deg, transparent 50%, $black-color 50%),
+    linear-gradient($black-color 42%, #f6ecf5 42%);
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+  background-size: 1px 100%, 20px 22px, 20px 22px, 20px 100%;
+  background-position: right 20px center, right bottom, right bottom,
+    right bottom;
+
+  &:hover,
+  &:active {
+    background-image: linear-gradient($black-color, $black-color),
+      linear-gradient(-135deg, transparent 50%, $button-color 50%),
+      linear-gradient(-225deg, transparent 50%, $button-color 50%),
+      linear-gradient($button-color 42%, $black-color 42%);
+  }
+  &:active {
+    color: $black-color;
+    border-color: $black-color;
+    background-color: $button-color;
+  }
+}
