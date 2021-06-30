@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.scss";
+import React from "react";
+import { useTransition, config, animated } from "@react-spring/web";
+import Navbar from "./components/navbar/Navbar";
+import HomePage from "./pages/home-page/HomePage";
+import SimulationPage from "./pages/simulation-page/SimulationPage";
+import { Switch, Route, useLocation } from "react-router-dom";
 
-function App() {
+const App = () => {
+  const location = useLocation();
+  const transitions = useTransition(location, {
+    config: config.slow,
+    from: { opacity: 0, transform: "translate(100%, 0)" },
+    enter: { opacity: 1, transform: "translate(0, 0)" },
+    leave: { opacity: 0, transform: "translate(-50%, 0)" },
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <Navbar />
+      {transitions((props, item) => (
+        <animated.div style={{ ...props }}>
+          <Switch location={item}>
+            <Route exact path="/" component={HomePage} />
+            <Route path="/sim" component={SimulationPage} />
+          </Switch>
+        </animated.div>
+      ))}
+    </React.Fragment>
   );
-}
+};
 
 export default App;
