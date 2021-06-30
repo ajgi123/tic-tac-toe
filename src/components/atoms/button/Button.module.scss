@@ -1,0 +1,25 @@
+@import "../../../variables.scss";
+
+.button {
+  background: none;
+  border: $border;
+  border-radius: $radius;
+  font: inherit;
+  line-height: 1;
+  margin: $margin;
+  padding: $button-padding;
+  background-color: $button-color;
+  color: $black-color;
+  transition: 0.25s;
+
+  &:hover:enabled,
+  &:focus:enabled {
+    border-color: $white-color;
+    color: $white-color;
+    background-color: $button-color-hover;
+  }
+
+  &:disabled {
+    background-color: $button-color-disabled;
+  }
+}
