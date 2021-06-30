@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://ajgi123.github.io/tic-tac-toe",
   "dependencies": {
+    "@react-spring/web": "^9.2.3",
     "@testing-library/jest-dom": "^5.13.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
