@@ -21,8 +21,8 @@ const App = () => {
       {transitions((props, item) => (
         <animated.div style={{ ...props }}>
           <Switch location={item}>
-            <Route exact path="/" component={HomePage} />
             <Route path="/sim" component={SimulationPage} />
+            <Route path="/" component={HomePage} />
           </Switch>
         </animated.div>
       ))}
