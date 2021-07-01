@@ -4,12 +4,17 @@ type DropdownMenuItemProps = {
   name: any;
   onMouseEnterHandler: () => void;
   onClickHandler: () => void;
+  isActive?: boolean;
 };
 
 const DropdownMenuItem = (props: DropdownMenuItemProps) => {
+  const style = props.isActive
+    ? `${styles.item} ${styles.active}`
+    : styles.item;
+
   return (
     <div
-      className={styles.item}
+      className={style}
       onMouseEnter={() => {
         props.onMouseEnterHandler();
       }}
