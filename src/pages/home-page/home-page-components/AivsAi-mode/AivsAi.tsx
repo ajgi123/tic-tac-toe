@@ -70,6 +70,7 @@ const AIvsAI = ({ isWin, ...props }: AIvsAIpropsType) => {
   };
 
   const onClickHandler = () => {
+    if (isPlaying) return;
     setIsPlaying(true);
   };
 
