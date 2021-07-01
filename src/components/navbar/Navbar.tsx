@@ -30,6 +30,7 @@ const Navbar = () => {
                     setInfo(GameModeInfo[key]);
                   }}
                   key={key}
+                  isActive={key === gameMode}
                   onClickHandler={() => {
                     if (gameMode === key) return;
                     history.push("/");
