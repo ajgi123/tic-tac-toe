@@ -8,7 +8,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
+    <Router basename="/tic-tac-toe">
       <GameModeContextProvider>
         <App />
       </GameModeContextProvider>
@@ -16,4 +16,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("root")
 );
-
