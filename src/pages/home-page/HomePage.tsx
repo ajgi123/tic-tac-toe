@@ -32,8 +32,6 @@ const HomePage = () => {
     initialState
   );
 
-  console.log(state);
-
   useEffect(() => {
     const winner = checkForWinner(state.gameState);
     if (winner || win) {

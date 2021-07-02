@@ -7,6 +7,7 @@ import Button from "../../components/atoms/button/Button";
 import InputNumber from "../../components/atoms/input-number/InputNumber";
 import Select from "../../components/atoms/select/Select";
 import Loading from "../../components/atoms/loading/Loading";
+import useLocalStorage from "../../hooks/useLocalStorage";
 import { wrap } from "comlink";
 import { PieChart } from "react-minimal-pie-chart";
 import { CellKind } from "../../types/cellKind";
@@ -24,7 +25,7 @@ const options = [
 
 const SimulationPage = () => {
   const [simulatedGames, setSimulatedGames] =
-    useState<null | ReturnTypeSimulate>(null);
+    useLocalStorage<null | ReturnTypeSimulate>("simGame", null);
   const [isLoading, setIsLoading] = useState(false);
   const [circleAi, setCircleAi] = useState(options[0].value);
   const [crossAi, setCrossAi] = useState(options[0].value);
