@@ -6,7 +6,6 @@ import useLocalStorage from "../../../../hooks/useLocalStorage";
 import { ReturnTypeSimulate } from "../../../../logic/simulate";
 import { useState, useEffect, useRef } from "react";
 import { useHistory, useParams } from "react-router";
-import { number } from "yargs";
 
 type PaginationPropsType = {
   path: string;
@@ -15,19 +14,41 @@ type PaginationPropsType = {
 
 const Pagination = (props: PaginationPropsType) => {
   const [page, setPage] = useState(1);
-  const [howMany, setHowMany] = useLocalStorage("howMany", 9);
-  const div = useRef(null);
+  const [howMany, setHowMany] = useLocalStorage("howMany", {
+    inputValue: 9,
+    pasedValue: 9,
+  });
   let history = useHistory();
   let { pageNum } = useParams<{ pageNum: string }>();
 
+  useEffect(() => {
+    if (!props.games) {
+      history.replace(props.path);
+    }
+  }, [props.games]);
+
+  useEffect(() => {
+    if (howMany.pasedValue !== howMany.inputValue) {
+      const timeout = setTimeout(() => {
+        setHowMany((prevState) => {
+          return { ...prevState, pasedValue: prevState.inputValue };
+        });
+        history.push(`${props.path}/1`);
+      }, 500);
+      return () => {
+        clearTimeout(timeout);
+      };
+    }
+  }, [howMany.inputValue]);
+
   let max = 1;
-  const startIndex = (page - 1) * howMany;
-  const endIndex = page * howMany;
+  const startIndex = (page - 1) * howMany.pasedValue;
+  const endIndex = page * howMany.pasedValue;
 
   let array: ReturnTypeSimulate = [];
 
   if (props.games) {
-    max = Math.ceil(props.games.length / howMany);
+    max = Math.ceil(props.games.length / howMany.pasedValue);
     array = props.games.slice(startIndex, endIndex);
   }
 
@@ -45,7 +66,9 @@ const Pagination = (props: PaginationPropsType) => {
   }, [pageNum]);
 
   const onChange = (value: number) => {
-    setHowMany(value);
+    setHowMany((prevState) => {
+      return { ...prevState, inputValue: value };
+    });
   };
 
   const clickHandler = (index: number) => {
@@ -80,7 +103,7 @@ const Pagination = (props: PaginationPropsType) => {
         min={9}
         max={15}
         step={1}
-        value={howMany}
+        value={howMany.inputValue}
         onChange={onChange}
         name={"Numbers of games per page"}
       />
