@@ -1,5 +1,5 @@
 import styles from "./SimulationPage.module.scss";
-import { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Pagination from "./simulation-page-components/pagination/Pagination";
 import AbsoluteWrapper from "../../components/absolute-wrapper/AbsoluteWrapper";
 import { ReturnTypeSimulate } from "../../logic/simulate";
@@ -11,7 +11,13 @@ import useLocalStorage from "../../hooks/useLocalStorage";
 import { wrap } from "comlink";
 import { PieChart } from "react-minimal-pie-chart";
 import { CellKind } from "../../types/cellKind";
-import { useHistory, useRouteMatch, Switch, Route } from "react-router-dom";
+import {
+  useHistory,
+  useRouteMatch,
+  Switch,
+  Route,
+  useLocation,
+} from "react-router-dom";
 
 const numberInput = {
   min: 1,
@@ -28,10 +34,13 @@ const SimulationPage = () => {
   const [simulatedGames, setSimulatedGames] =
     useLocalStorage<null | ReturnTypeSimulate>("simGame", null);
   const [isLoading, setIsLoading] = useState(false);
-  const [circleAi, setCircleAi] = useState(options[0].value);
-  const [crossAi, setCrossAi] = useState(options[0].value);
-  const [number, setNumber] = useState(numberInput.min);
-  let { path, url } = useRouteMatch();
+  const [inputsState, setInputsState] = useLocalStorage("inputState", {
+    circleAi: options[0].value,
+    crossAi: options[0].value,
+    number: numberInput.min,
+  });
+  let { pathname } = useLocation();
+  let { path } = useRouteMatch();
   let history = useHistory();
 
   const onClickHandler = async () => {
@@ -42,22 +51,41 @@ const SimulationPage = () => {
       type: "module",
     });
     const { simulate } = wrap<import("../../worker").SimulateWorker>(worker);
-    const games = await simulate(number, circleAi, crossAi);
+    const games = await simulate(
+      inputsState.number,
+      inputsState.circleAi,
+      inputsState.crossAi
+    );
     setSimulatedGames(games);
     setIsLoading(false);
     history.push(`${path}/1`);
   };
 
   const selectCircleAi = (value: string) => {
-    setCircleAi(value);
+    setInputsState((prevState) => {
+      return { ...prevState, circleAi: value };
+    });
   };
 
   const selectCrossAi = (value: string) => {
-    setCrossAi(value);
+    setInputsState((prevState) => {
+      return { ...prevState, crossAi: value };
+    });
   };
 
   const changeNumber = (value: number) => {
-    setNumber(value);
+    setInputsState((prevState) => {
+      return { ...prevState, number: value };
+    });
+  };
+
+  const showHideGames = () => {
+    if (pathname === path) {
+      history.push(`${path}/1`);
+      return;
+    }
+
+    history.push(`${path}`);
   };
 
   let data: [number, number, number];
@@ -86,13 +114,13 @@ const SimulationPage = () => {
         <div className={styles.simulation_page_grid_div}>
           <Select
             options={options}
-            value={circleAi}
+            value={inputsState.circleAi}
             onChange={selectCircleAi}
             name="Circle AI:"
           />
           <Select
             options={options}
-            value={crossAi}
+            value={inputsState.crossAi}
             onChange={selectCrossAi}
             name="Cross AI:"
           />
@@ -100,7 +128,7 @@ const SimulationPage = () => {
             min={numberInput.min}
             max={numberInput.max}
             step={numberInput.step}
-            value={number}
+            value={inputsState.number}
             onChange={changeNumber}
             name="Number of simulation:"
           />
@@ -108,26 +136,32 @@ const SimulationPage = () => {
         </div>
         {isLoading && <Loading name="SIMULATING..." />}
         {data!! && (
-          <div className={styles.simulation_pie_div}>
-            <PieChart
-              data={[
-                { title: "Draw", value: data[0], color: "#E9B5B4" },
-                { title: "Circle", value: data[1], color: "#A5A6BC" },
-                { title: "Cross", value: data[2], color: "#BBD0BA" },
-              ]}
-              label={({ dataEntry }) => {
-                if (dataEntry.value > 0) {
-                  return `${dataEntry.title} ${dataEntry.value}`;
-                }
-              }}
-              labelStyle={{
-                fontSize: "0.35rem",
-                fontFamily: "inherit",
-              }}
-              animate={true}
-              labelPosition={50}
+          <React.Fragment>
+            <div className={styles.simulation_pie_div}>
+              <PieChart
+                data={[
+                  { title: "Draw", value: data[0], color: "#E9B5B4" },
+                  { title: "Circle", value: data[1], color: "#A5A6BC" },
+                  { title: "Cross", value: data[2], color: "#BBD0BA" },
+                ]}
+                label={({ dataEntry }) => {
+                  if (dataEntry.value > 0) {
+                    return `${dataEntry.title} ${dataEntry.value}`;
+                  }
+                }}
+                labelStyle={{
+                  fontSize: "0.35rem",
+                  fontFamily: "inherit",
+                }}
+                animate={true}
+                labelPosition={50}
+              />
+            </div>
+            <Button
+              name={path === pathname ? "Show Games" : "Hide Games"}
+              onClick={showHideGames}
             />
-          </div>
+          </React.Fragment>
         )}
         <Switch>
           <Route

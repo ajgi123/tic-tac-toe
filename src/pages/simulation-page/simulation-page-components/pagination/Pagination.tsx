@@ -2,8 +2,9 @@ import styles from "./Pagination.module.scss";
 import SimulatedGame from "../simulated-game/SimulatedGame";
 import Button from "../../../../components/atoms/button/Button";
 import InputNumber from "../../../../components/atoms/input-number/InputNumber";
+import useLocalStorage from "../../../../hooks/useLocalStorage";
 import { ReturnTypeSimulate } from "../../../../logic/simulate";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useHistory, useParams } from "react-router";
 import { number } from "yargs";
 
@@ -14,7 +15,8 @@ type PaginationPropsType = {
 
 const Pagination = (props: PaginationPropsType) => {
   const [page, setPage] = useState(1);
-  const [howMany, setHowMany] = useState(9);
+  const [howMany, setHowMany] = useLocalStorage("howMany", 9);
+  const div = useRef(null);
   let history = useHistory();
   let { pageNum } = useParams<{ pageNum: string }>();
 
@@ -88,7 +90,7 @@ const Pagination = (props: PaginationPropsType) => {
             <SimulatedGame
               gameState={game.gameState}
               winCombination={game.winCombination}
-              index={index + 1}
+              index={index + 1 + startIndex}
               winner={game.winner}
             />
           );
