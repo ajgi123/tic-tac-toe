@@ -1,7 +1,11 @@
 @import "../../../../variables.scss";
 
-.pagiantion {
+.pagination {
   margin: $margin;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .pagination_grid_div {

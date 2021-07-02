@@ -1,5 +1,5 @@
 import styles from "./SimulationPage.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Pagination from "./simulation-page-components/pagination/Pagination";
 import AbsoluteWrapper from "../../components/absolute-wrapper/AbsoluteWrapper";
 import { ReturnTypeSimulate } from "../../logic/simulate";
@@ -45,6 +45,7 @@ const SimulationPage = () => {
     const games = await simulate(number, circleAi, crossAi);
     setSimulatedGames(games);
     setIsLoading(false);
+    history.push(`${path}/1`);
   };
 
   const selectCircleAi = (value: string) => {

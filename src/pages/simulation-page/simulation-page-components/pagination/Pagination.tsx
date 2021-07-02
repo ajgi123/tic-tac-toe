@@ -1,9 +1,11 @@
 import styles from "./Pagination.module.scss";
 import SimulatedGame from "../simulated-game/SimulatedGame";
 import Button from "../../../../components/atoms/button/Button";
+import InputNumber from "../../../../components/atoms/input-number/InputNumber";
 import { ReturnTypeSimulate } from "../../../../logic/simulate";
 import { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router";
+import { number } from "yargs";
 
 type PaginationPropsType = {
   path: string;
@@ -40,8 +42,8 @@ const Pagination = (props: PaginationPropsType) => {
     setPage(+pageNum);
   }, [pageNum]);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setHowMany(+e.target.value);
+  const onChange = (value: number) => {
+    setHowMany(value);
   };
 
   const clickHandler = (index: number) => {
@@ -72,12 +74,13 @@ const Pagination = (props: PaginationPropsType) => {
 
   return (
     <div className={styles.pagination}>
-      <input
-        type="number"
-        min="9"
-        max="15"
+      <InputNumber
+        min={9}
+        max={15}
+        step={1}
         value={howMany}
         onChange={onChange}
+        name={"Numbers of games per page"}
       />
       <div className={styles.pagination_grid_div}>
         {array.map((game, index) => {
@@ -91,9 +94,11 @@ const Pagination = (props: PaginationPropsType) => {
           );
         })}
       </div>
-      <Button onClick={prevPage} disabled={page === 1} name={`<<`} />
-      {buttons}
-      <Button onClick={nextPage} disabled={page === max} name={`>>`} />
+      <div>
+        <Button onClick={prevPage} disabled={page === 1} name={`<<`} />
+        {buttons}
+        <Button onClick={nextPage} disabled={page === max} name={`>>`} />
+      </div>
     </div>
   );
 };
