@@ -14,7 +14,7 @@ const Pagination = (props: PaginationPropsType) => {
   const [page, setPage] = useState(1);
   const [howMany, setHowMany] = useState(9);
   let history = useHistory();
-  let { pageNum } = useParams();
+  let { pageNum } = useParams<{ pageNum: string }>();
 
   let max = 1;
   const startIndex = (page - 1) * howMany;
@@ -28,11 +28,11 @@ const Pagination = (props: PaginationPropsType) => {
   }
 
   useEffect(() => {
-    if (isNaN(+pageNum) || pageNum < 1) {
+    if (isNaN(+pageNum) || +pageNum < 1) {
       history.push(`${props.path}/1`);
       return;
     }
-    if (pageNum > max) {
+    if (+pageNum > max) {
       history.push(`${props.path}/${max}`);
       return;
     }
@@ -79,16 +79,18 @@ const Pagination = (props: PaginationPropsType) => {
         value={howMany}
         onChange={onChange}
       />
-      {array.map((game, index) => {
-        return (
-          <SimulatedGame
-            gameState={game.gameState}
-            winCombination={game.winCombination}
-            index={index + 1}
-            winner={game.winner}
-          />
-        );
-      })}
+      <div className={styles.pagination_grid_div}>
+        {array.map((game, index) => {
+          return (
+            <SimulatedGame
+              gameState={game.gameState}
+              winCombination={game.winCombination}
+              index={index + 1}
+              winner={game.winner}
+            />
+          );
+        })}
+      </div>
       <Button onClick={prevPage} disabled={page === 1} name={`<<`} />
       {buttons}
       <Button onClick={nextPage} disabled={page === max} name={`>>`} />

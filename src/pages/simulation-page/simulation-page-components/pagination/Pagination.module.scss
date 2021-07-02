@@ -3,3 +3,8 @@
 .pagiantion {
   margin: $margin;
 }
+
+.pagination_grid_div {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
