@@ -7,7 +7,7 @@ import { useHistory, useParams } from "react-router";
 
 type PaginationPropsType = {
   path: string;
-  array: ReturnTypeSimulate[] | null;
+  games: ReturnTypeSimulate | null;
 };
 
 const Pagination = (props: PaginationPropsType) => {
@@ -20,11 +20,11 @@ const Pagination = (props: PaginationPropsType) => {
   const startIndex = (page - 1) * howMany;
   const endIndex = page * howMany;
 
-  let array: ReturnTypeSimulate[] = [];
+  let array: ReturnTypeSimulate = [];
 
-  if (props.array) {
-    max = Math.ceil(props.array.length / howMany);
-    array = props.array.slice(startIndex, endIndex);
+  if (props.games) {
+    max = Math.ceil(props.games.length / howMany);
+    array = props.games.slice(startIndex, endIndex);
   }
 
   useEffect(() => {
@@ -79,8 +79,15 @@ const Pagination = (props: PaginationPropsType) => {
         value={howMany}
         onChange={onChange}
       />
-      {array.map((item) => {
-        return <h2>{item}</h2>;
+      {array.map((game, index) => {
+        return (
+          <SimulatedGame
+            gameState={game.gameState}
+            winCombination={game.winCombination}
+            index={index + 1}
+            winner={game.winner}
+          />
+        );
       })}
       <Button onClick={prevPage} disabled={page === 1} name={`<<`} />
       {buttons}
