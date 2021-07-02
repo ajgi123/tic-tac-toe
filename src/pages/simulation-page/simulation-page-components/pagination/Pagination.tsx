@@ -2,7 +2,7 @@ import styles from "./Pagination.module.scss";
 import SimulatedGame from "../simulated-game/SimulatedGame";
 import Button from "../../../../components/atoms/button/Button";
 import { ReturnTypeSimulate } from "../../../../logic/simulate";
-import { useState, useEffect, ReactHTMLElement } from "react";
+import { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router";
 
 type PaginationPropsType = {
@@ -71,7 +71,7 @@ const Pagination = (props: PaginationPropsType) => {
   }
 
   return (
-    <div>
+    <div className={styles.pagination}>
       <input
         type="number"
         min="9"
