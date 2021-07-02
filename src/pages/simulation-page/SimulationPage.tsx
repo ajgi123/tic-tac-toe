@@ -1,6 +1,6 @@
 import styles from "./SimulationPage.module.scss";
 import { useState } from "react";
-import SimulatedGame from "./simulation-page-components/simulated-game/SimulatedGame";
+import Pagination from "./simulation-page-components/pagination/Pagination";
 import AbsoluteWrapper from "../../components/absolute-wrapper/AbsoluteWrapper";
 import { ReturnTypeSimulate } from "../../logic/simulate";
 import Button from "../../components/atoms/button/Button";
@@ -11,6 +11,7 @@ import useLocalStorage from "../../hooks/useLocalStorage";
 import { wrap } from "comlink";
 import { PieChart } from "react-minimal-pie-chart";
 import { CellKind } from "../../types/cellKind";
+import { useHistory, useRouteMatch, Switch, Route } from "react-router-dom";
 
 const numberInput = {
   min: 1,
@@ -30,6 +31,8 @@ const SimulationPage = () => {
   const [circleAi, setCircleAi] = useState(options[0].value);
   const [crossAi, setCrossAi] = useState(options[0].value);
   const [number, setNumber] = useState(numberInput.min);
+  let { path, url } = useRouteMatch();
+  let history = useHistory();
 
   const onClickHandler = async () => {
     if (isLoading) return;
@@ -125,18 +128,14 @@ const SimulationPage = () => {
             />
           </div>
         )}
-        <div className={styles.simulation_page_grid_div}>
-          {simulatedGames?.map((game, index) => {
-            return (
-              <SimulatedGame
-                gameState={game.gameState}
-                winCombination={game.winCombination}
-                index={index + 1}
-                winner={game.winner}
-              />
-            );
-          })}
-        </div>
+        <Switch>
+          <Route
+            path={`${path}/:pageNum`}
+            render={(props) => (
+              <Pagination {...props} path={path} games={simulatedGames} />
+            )}
+          />
+        </Switch>
       </div>
     </AbsoluteWrapper>
   );
