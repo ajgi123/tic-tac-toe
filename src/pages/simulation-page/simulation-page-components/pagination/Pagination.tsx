@@ -4,7 +4,7 @@ import Button from "../../../../components/atoms/button/Button";
 import InputNumber from "../../../../components/atoms/input-number/InputNumber";
 import useLocalStorage from "../../../../hooks/useLocalStorage";
 import { ReturnTypeSimulate } from "../../../../logic/simulate";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router";
 
 type PaginationPropsType = {
