@@ -115,6 +115,7 @@ const Pagination = (props: PaginationPropsType) => {
               winCombination={game.winCombination}
               index={index + 1 + startIndex}
               winner={game.winner}
+              key={index + startIndex}
             />
           );
         })}
