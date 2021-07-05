@@ -17,7 +17,6 @@ import {
   Switch,
   Route,
   useLocation,
-  useParams,
 } from "react-router-dom";
 
 const numberInput = {
@@ -43,7 +42,6 @@ const SimulationPage = () => {
   let { pathname } = useLocation();
   let { path } = useRouteMatch();
   let history = useHistory();
-  let { pageNum } = useParams<{ pageNum: string }>();
 
   const onClickHandler = async () => {
     if (isLoading) return;
@@ -60,10 +58,7 @@ const SimulationPage = () => {
     );
     setSimulatedGames(games);
     setIsLoading(false);
-    console.log(pageNum);
-    if (pageNum && +pageNum > 1) {
-      history.push(`${path}/1`);
-    }
+    history.push(`${path}/1`);
   };
 
   const selectCircleAi = (value: string) => {
