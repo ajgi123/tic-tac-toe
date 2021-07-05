@@ -13,4 +13,9 @@
 .homepage_div_gameboard {
   height: 25rem;
   width: 25rem;
+
+  @media screen and (max-width: 27rem) {
+    height: 17rem;
+    width: 17rem;
+  }
 }
