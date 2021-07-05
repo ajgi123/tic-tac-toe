@@ -8,7 +8,7 @@ import Dropdown from "./dropdown/Dropdown";
 import NavbarItem from "./navbar-items/NavbarItem";
 import { simulationInfo } from "../../logic/simulationInfo";
 import { typedObjectKeys } from "../../helpers/typedObjectKeys";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 
 const gameModeInfoKeys = typedObjectKeys(GameModeInfo);
 
@@ -16,7 +16,8 @@ const Navbar = () => {
   const [info, setInfo] = useState(GameModeInfo.PvsP);
   const { setGameMode, gameMode } = useContext(GameModeContext);
   const history = useHistory();
-
+  let { pathname } = useLocation();
+  console.log(pathname);
   return (
     <nav className={styles.navbar}>
       <ul className={styles.navbar_ul}>
@@ -32,7 +33,7 @@ const Navbar = () => {
                   key={key}
                   isActive={key === gameMode}
                   onClickHandler={() => {
-                    if (gameMode === key) return;
+                    if (gameMode === key && pathname === "/") return;
                     history.push("/");
                     setTimeout(() => {
                       setGameMode(key);
