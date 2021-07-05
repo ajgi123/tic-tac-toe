@@ -1,4 +1,3 @@
-import "./App.scss";
 import React from "react";
 import { useTransition, config, animated } from "@react-spring/web";
 import Navbar from "./components/navbar/Navbar";
