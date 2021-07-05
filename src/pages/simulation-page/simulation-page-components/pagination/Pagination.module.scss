@@ -6,9 +6,28 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
+  button {
+    margin: $pagination-button-margin;
+    padding: $pagination-button-padding;
+  }
 }
 
 .pagination_grid_div {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+
+  @media screen and (max-width: 58rem) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (max-width: 37rem) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pagination_flex_div {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }

@@ -120,7 +120,7 @@ const Pagination = (props: PaginationPropsType) => {
           );
         })}
       </div>
-      <div>
+      <div className={styles.pagination_flex_div}>
         <Button onClick={prevPage} disabled={page === 1} name={`<<`} />
         {buttons}
         <Button onClick={nextPage} disabled={page === max} name={`>>`} />
