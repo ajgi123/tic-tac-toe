@@ -17,7 +17,6 @@ const Navbar = () => {
   const { setGameMode, gameMode } = useContext(GameModeContext);
   const history = useHistory();
   let { pathname } = useLocation();
-  console.log(pathname);
   return (
     <nav className={styles.navbar}>
       <ul className={styles.navbar_ul}>
