@@ -24,7 +24,7 @@ Each simulated game is displayed. 50 items take a lot of space so I have impleme
 
 <img src="https://media.giphy.com/media/619ZWmPNX1lqVJqCzy/giphy.gif" title="Demo gif"/>
 
-https://ajgi123.github.io/tic-tac-toe/
+Link to the project: https://ajgi123.github.io/tic-tac-toe/
 
 
 ## Run Locally
