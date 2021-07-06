@@ -22,7 +22,7 @@ Each simulated game is displayed. 50 items take a lot of space so I have impleme
 
 ## Demo
 
-<img src="https://media.giphy.com/media/619ZWmPNX1lqVJqCzy/giphy.gif" title="Demo gif"/>
+<img src="https://media.giphy.com/media/619ZWmPNX1lqVJqCzy/giphy.gif" title="Demo gif" width=100%/>
 
 Link to the project: https://ajgi123.github.io/tic-tac-toe/
 
