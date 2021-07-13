@@ -10,7 +10,7 @@ export const simulate = (
 ) => {
   let gameState = generateEmptyGameState(3);
   const games = [];
-  for (let i = 0; i < howMany; i++) {
+  for (let i = 1; i <= howMany; i++) {
     let result;
     while (!result) {
       let firstMove =
@@ -30,7 +30,7 @@ export const simulate = (
       gameState[secondMove] = CellKind.Cross;
       result = checkForWinner(gameState);
     }
-    games.push({ ...result, gameState: gameState });
+    games.push({ ...result, gameState: gameState, index: i });
     gameState = generateEmptyGameState(3);
   }
   return games;
