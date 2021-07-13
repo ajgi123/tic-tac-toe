@@ -1,5 +1,5 @@
-import { useState } from "react";
 import Select from "../../../../components/atoms/select/Select";
+import useStateRelatedToProp from "../../../../hooks/useStateRelatedToProp";
 
 const options = [
   { value: "3", label: "3x3" },
@@ -13,9 +13,9 @@ type PvsPpropsType = {
 };
 
 const PvsP = (props: PvsPpropsType) => {
-  const [gridSize, setGridSize] = useState(props.initialSize.toString());
-
-  console.log(props.initialSize);
+  const [gridSize, setGridSize] = useStateRelatedToProp(
+    props.initialSize.toString()
+  );
 
   const onChange = (size: string) => {
     setGridSize(size);
