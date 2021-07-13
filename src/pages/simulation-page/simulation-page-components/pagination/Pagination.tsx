@@ -1,87 +1,34 @@
 import styles from "./Pagination.module.scss";
-import SimulatedGame from "../simulated-game/SimulatedGame";
 import Button from "../../../../components/atoms/button/Button";
 import InputNumber from "../../../../components/atoms/input-number/InputNumber";
-import useLocalStorage from "../../../../hooks/useLocalStorage";
+import usePagination from "../../../../hooks/usePagination";
+import { ArrayElement } from "../../../../helpers/ArrayElement";
 import { ReturnTypeSimulate } from "../../../../logic/simulate";
-import { useState, useEffect } from "react";
-import { useHistory, useParams } from "react-router";
+import { useParams } from "react-router";
+import { ReactNode } from "react";
 
 type PaginationPropsType = {
   path: string;
-  games: ReturnTypeSimulate | null;
+  array: ReturnTypeSimulate;
+  mapFunction: (
+    item: ArrayElement<ReturnTypeSimulate>,
+    index: number
+  ) => ReactNode;
 };
 
 const Pagination = (props: PaginationPropsType) => {
-  const [page, setPage] = useState(1);
-  const [howMany, setHowMany] = useLocalStorage("howMany", {
-    inputValue: 9,
-    pasedValue: 9,
-  });
-  let history = useHistory();
   let { pageNum } = useParams<{ pageNum: string }>();
 
-  useEffect(() => {
-    if (!props.games) {
-      history.replace(props.path);
-    }
-  }, [props.games]);
-
-  useEffect(() => {
-    if (howMany.pasedValue !== howMany.inputValue) {
-      const timeout = setTimeout(() => {
-        setHowMany((prevState) => {
-          return { ...prevState, pasedValue: prevState.inputValue };
-        });
-        history.push(`${props.path}/1`);
-      }, 500);
-      return () => {
-        clearTimeout(timeout);
-      };
-    }
-  }, [howMany.inputValue]);
-
-  let max = 1;
-  const startIndex = (page - 1) * howMany.pasedValue;
-  const endIndex = page * howMany.pasedValue;
-
-  let array: ReturnTypeSimulate = [];
-
-  if (props.games) {
-    max = Math.ceil(props.games.length / howMany.pasedValue);
-    array = props.games.slice(startIndex, endIndex);
-  }
-
-  useEffect(() => {
-    if (isNaN(+pageNum) || +pageNum < 1) {
-      history.push(`${props.path}/1`);
-      return;
-    }
-    if (+pageNum > max) {
-      history.push(`${props.path}/${max}`);
-      return;
-    }
-
-    setPage(+pageNum);
-  }, [pageNum]);
-
-  const onChange = (value: number) => {
-    setHowMany((prevState) => {
-      return { ...prevState, inputValue: value };
-    });
-  };
-
-  const clickHandler = (index: number) => {
-    history.push(`${props.path}/${index}`);
-  };
-
-  const prevPage = () => {
-    history.push(`${props.path}/${page - 1}`);
-  };
-
-  const nextPage = () => {
-    history.push(`${props.path}/${page + 1}`);
-  };
+  const {
+    paginatedArray,
+    onChange,
+    clickHandler,
+    prevPage,
+    nextPage,
+    max,
+    howMany,
+    page,
+  } = usePagination(9, pageNum, props.path, props.array);
 
   const buttons = [];
 
@@ -108,17 +55,7 @@ const Pagination = (props: PaginationPropsType) => {
         name={"Numbers of games per page"}
       />
       <div className={styles.pagination_grid_div}>
-        {array.map((game, index) => {
-          return (
-            <SimulatedGame
-              gameState={game.gameState}
-              winCombination={game.winCombination}
-              index={index + 1 + startIndex}
-              winner={game.winner}
-              key={index + startIndex}
-            />
-          );
-        })}
+        {paginatedArray.map(props.mapFunction)}
       </div>
       <div className={styles.pagination_flex_div}>
         <Button onClick={prevPage} disabled={page === 1} name={`<<`} />
