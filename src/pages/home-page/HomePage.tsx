@@ -34,10 +34,10 @@ const HomePage = () => {
 
   useEffect(() => {
     const winner = checkForWinner(state.gameState);
-    if (winner || win) {
+    if (winner && winner.winner !== win?.winner) {
       setWin(winner);
     }
-  }, [state.gameState, gameMode]);
+  }, [state.gameState, gameMode, win]);
 
   const move = useCallback(
     (index: number) => {
@@ -60,14 +60,17 @@ const HomePage = () => {
         return curState;
       });
     },
-    [win]
+    [win, setState]
   );
 
-  const aiMove = (aiFunc: (gameState: CellKind[]) => number) => {
-    if (win) return;
-    const index = aiFunc(state.gameState);
-    move(index);
-  };
+  const aiMove = useCallback(
+    (aiFunc: (gameState: CellKind[]) => number) => {
+      if (win) return;
+      const index = aiFunc(state.gameState);
+      move(index);
+    },
+    [state.gameState, win, move]
+  );
 
   useEffect(() => {
     if (gameMode === "Hard" && state.turn === CellKind.Cross) {
@@ -83,7 +86,7 @@ const HomePage = () => {
         clearTimeout(timeout);
       };
     }
-  }, [state.turn, gameMode]);
+  }, [state.turn, gameMode, aiMove]);
 
   const humanMove = (index: number) => {
     if (gameMode === "AIvsAI") return;
@@ -107,13 +110,16 @@ const HomePage = () => {
     setWin(null);
   };
 
-  const changeState = (gamestate: CellKind[]) => {
-    if (win) return;
-    setState({
-      turn: CellKind.Circle,
-      gameState: gamestate,
-    });
-  };
+  const changeState = useCallback(
+    (gamestate: CellKind[]) => {
+      if (win) return;
+      setState({
+        turn: CellKind.Circle,
+        gameState: gamestate,
+      });
+    },
+    [win, setState]
+  );
 
   const changeGridSize = (size: number) => {
     setState({ ...initialState, gameState: generateEmptyGameState(size) });
@@ -159,7 +165,6 @@ const HomePage = () => {
           <Easy
             gameState={state.gameState}
             turn={state.turn}
-            moveAI={move}
             changeState={changeState}
             isWin={win !== null}
           />
