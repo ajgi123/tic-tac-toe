@@ -34,10 +34,10 @@ const HomePage = () => {
 
   useEffect(() => {
     const winner = checkForWinner(state.gameState);
-    if (winner && winner.winner !== win?.winner) {
+    if ((winner && !win) || (!winner && win)) {
       setWin(winner);
     }
-  }, [state.gameState, gameMode, win]);
+  }, [state.gameState, win]);
 
   const move = useCallback(
     (index: number) => {
