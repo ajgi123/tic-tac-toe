@@ -8,6 +8,9 @@
   h1 {
     font-size: 2rem;
   }
+  @media screen and (max-height: 35rem) {
+    height: 35rem;
+  }
 }
 
 .homepage_div_gameboard {
@@ -15,6 +18,11 @@
   width: 25rem;
 
   @media screen and (max-width: 27rem) {
+    height: 17rem;
+    width: 17rem;
+  }
+
+  @media screen and (max-height: 35rem) {
     height: 17rem;
     width: 17rem;
   }
