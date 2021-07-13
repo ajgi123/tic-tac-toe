@@ -17,43 +17,40 @@ type AIvsAIpropsType = {
   isWin: boolean;
 };
 
-const AIvsAI = ({ isWin, ...props }: AIvsAIpropsType) => {
+const AIvsAI = ({ isWin, moveAI, turn }: AIvsAIpropsType) => {
   const [circleAi, setCircleAi] = useState(options[0].value);
   const [crossAi, setCrossAi] = useState(options[0].value);
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
-    if (isPlaying) {
-      const timeOut = setTimeout(() => {
-        console.log("time");
-        let aiFunc = randomAi;
-        if (props.turn === CellKind.Circle) {
-          if (circleAi === "miniMax") {
-            aiFunc = bindTrailingArgs(
-              miniMaxScope,
-              CellKind.Circle,
-              CellKind.Cross
-            );
-          }
+    if (!isPlaying) return;
+    const timeOut = setTimeout(() => {
+      let aiFunc = randomAi;
+      if (turn === CellKind.Circle) {
+        if (circleAi === "miniMax") {
+          aiFunc = bindTrailingArgs(
+            miniMaxScope,
+            CellKind.Circle,
+            CellKind.Cross
+          );
         }
+      }
 
-        if (props.turn === CellKind.Cross) {
-          if (crossAi === "miniMax") {
-            aiFunc = bindTrailingArgs(
-              miniMaxScope,
-              CellKind.Cross,
-              CellKind.Circle
-            );
-          }
+      if (turn === CellKind.Cross) {
+        if (crossAi === "miniMax") {
+          aiFunc = bindTrailingArgs(
+            miniMaxScope,
+            CellKind.Cross,
+            CellKind.Circle
+          );
         }
-        console.log(aiFunc);
-        props.moveAI(aiFunc);
-      }, 400);
-      return () => {
-        clearTimeout(timeOut);
-      };
-    }
-  }, [isPlaying, props, circleAi, crossAi]);
+      }
+      moveAI(aiFunc);
+    }, 400);
+    return () => {
+      clearTimeout(timeOut);
+    };
+  }, [isPlaying, moveAI, turn, circleAi, crossAi]);
 
   useEffect(() => {
     if (isWin) {
