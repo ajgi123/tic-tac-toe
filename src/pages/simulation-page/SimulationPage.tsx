@@ -7,7 +7,9 @@ import Button from "../../components/atoms/button/Button";
 import InputNumber from "../../components/atoms/input-number/InputNumber";
 import Select from "../../components/atoms/select/Select";
 import Loading from "../../components/atoms/loading/Loading";
+import SimulatedGame from "./simulation-page-components/simulated-game/SimulatedGame";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import { ArrayElement } from "../../helpers/ArrayElement";
 import { wrap } from "comlink";
 import { PieChart } from "react-minimal-pie-chart";
 import { CellKind } from "../../types/cellKind";
@@ -17,6 +19,7 @@ import {
   Switch,
   Route,
   useLocation,
+  Redirect,
 } from "react-router-dom";
 
 const numberInput = {
@@ -30,15 +33,32 @@ const options = [
   { value: "miniMax", label: "MiniMax" },
 ];
 
+const initialInputState = {
+  circleAi: options[0].value,
+  crossAi: options[0].value,
+  number: numberInput.min,
+};
+
+const mapSimGames = (game: ArrayElement<ReturnTypeSimulate>, index: number) => {
+  return (
+    <SimulatedGame
+      gameState={game.gameState}
+      winCombination={game.winCombination}
+      index={game.index}
+      winner={game.winner}
+      key={index}
+    />
+  );
+};
+
 const SimulationPage = () => {
   const [simulatedGames, setSimulatedGames] =
     useLocalStorage<null | ReturnTypeSimulate>("simGame", null);
   const [isLoading, setIsLoading] = useState(false);
-  const [inputsState, setInputsState] = useLocalStorage("inputState", {
-    circleAi: options[0].value,
-    crossAi: options[0].value,
-    number: numberInput.min,
-  });
+  const [inputsState, setInputsState] = useLocalStorage(
+    "inputState",
+    initialInputState
+  );
   let { pathname } = useLocation();
   let { path } = useRouteMatch();
   let history = useHistory();
@@ -166,9 +186,19 @@ const SimulationPage = () => {
         <Switch>
           <Route
             path={`${path}/:pageNum`}
-            render={(props) => (
-              <Pagination {...props} path={path} games={simulatedGames} />
-            )}
+            render={(props) => {
+              if (simulatedGames) {
+                return (
+                  <Pagination
+                    {...props}
+                    path={path}
+                    array={simulatedGames}
+                    mapFunction={mapSimGames}
+                  />
+                );
+              }
+              return <Redirect to={path} />;
+            }}
           />
         </Switch>
       </div>
