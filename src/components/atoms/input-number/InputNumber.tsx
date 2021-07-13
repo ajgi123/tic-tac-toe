@@ -10,37 +10,44 @@ type InputNumberPropsType = {
   name?: string;
 };
 
-const InputNumber = (props: InputNumberPropsType) => {
+const InputNumber = ({
+  value,
+  onChange,
+  min,
+  max,
+  step,
+  name,
+}: InputNumberPropsType) => {
   useEffect(() => {
-    let inputNumber = props.value;
+    let inputNumber = value;
 
-    if (inputNumber > props.max || inputNumber < props.min) {
-      inputNumber = inputNumber > props.max ? props.max : props.min;
+    if (inputNumber > max || inputNumber < min) {
+      inputNumber = inputNumber > max ? max : min;
       const timeout = setTimeout(() => {
-        props.onChange(inputNumber);
+        onChange(inputNumber);
       }, 200);
       return () => {
         clearTimeout(timeout);
       };
     }
-  }, [props.value]);
+  }, [value]);
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputNumber = +e.currentTarget.value;
-    props.onChange(inputNumber);
+    onChange(inputNumber);
   };
 
   return (
     <label className={styles.input_label}>
-      {props.name}
+      {name}
       <input
         className={styles.input}
         type="number"
-        value={props.value}
+        value={value}
         onChange={onChangeHandler}
-        min={props.min}
-        max={props.max}
-        step={props.step}
+        min={min}
+        max={max}
+        step={step}
       ></input>
     </label>
   );
