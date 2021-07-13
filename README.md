@@ -1,46 +1,56 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Tic Tac Toe on steroids
 
-## Available Scripts
+An application used to play and simulate games of tic tac toe, built with React, Typescript and SCSS.
 
-In the project directory, you can run:
+Used libraries: 
+- comlink
+- react minimal pie chart
+- react router
+- react spring 
+- worker plugin
 
-### `npm start`
+## About the app 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The application has 4 game modes. Each game mode has its place in local storage, so progress won't be lost on refresh. Some game modes have twists to make gameplay
+more interesting. For example, in Easy game mode, there is implemented undo-redo functionality. In Player vs Player, you can change the size of the gameboard from classic 3x3 up to 5x5.
+In AI vs AI, you can watch a game of AIs of your choice playing against each other. In Hard mode, you simply play against the minimax algorithm.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+In the application, you can also simulate up to 50 games of AI vs AI. Since this process can be time-consuming, simulations are run by web worker. Results are displayed on the pie chart. 
+Each simulated game is displayed. 50 items take a lot of space so I have implemented pagination using react-router. 
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Demo
 
-### `npm run build`
+<img src="https://media.giphy.com/media/619ZWmPNX1lqVJqCzy/giphy.gif" title="Demo gif" width=100%/>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Link to the project: https://ajgi123.github.io/tic-tac-toe/
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Run Locally
 
-### `npm run eject`
+Clone the project
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```bash
+  git clone https://github.com/ajgi123/tic-tac-toe
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Go to the project directory
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```bash
+  cd my-project
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Install dependencies
 
-## Learn More
+```bash
+  npm install
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Start the server
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+  npm run start
+```
+
+  
